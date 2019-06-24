@@ -1,0 +1,76 @@
+cafe
+	-src
+		- com.kitri.cafe.admin.board.controller
+			BoardAdminController.java
+			
+		- com.kitri.cafe.admin.board.dao
+			BoardAdminDao.java (I)
+			
+		- com.kitri.cafe.admin.board.model	
+			BoardTypeDto.java
+			CategoryDto.java
+			BoardListDto.java
+			
+		- com.kitri.cafe.admin.service
+			BoardAdminService.java (I)
+			BoardAdminServiceImpl.java 
+			
+		- com.kitri.cafe.board.controller
+			AlbumController.java
+			BbsController.java
+			BoardController.java
+			MemoController.java
+			ReboardController.java
+				
+		- com.kitri.cafe.board.dao
+			AlbumDao.java (I)
+			BbsDao.java (I)
+			BoardDao.java (I)
+			MemoDao.java (I)
+			ReboardDao.java (I)
+			
+		- com.kitri.cafe.board.model
+			AlbumDto.java
+			BbsDto.java
+			BoardDto.java 
+			MemoDto.java 
+			ReboardDto.java 
+		
+		- com.kitri.cafe.service
+			AlbumService.java(I)
+			AlbumServiceImpl.java
+			BbsService.java(I)
+			BbsServiceImpl.java
+			BoardService.java(I)
+			BoardServiceImpl.java
+			MemoService.java(I)
+			MemoServiceImpl.java
+			ReboardService.java(I)
+			ReboardServiceImpl.java
+
+		- com.kitri.cafe.common.dao
+			CommonDao.java (I)
+					
+		- com.kitri.cafe.common.service
+			CommonService.java(I)
+			CommonServiceImple.java
+		
+		- com.kitri.cafe.member.model	
+			MemberDto.java
+			
+		- com.kitri.cafe.util
+			CafeConstance.java
+			PageNavigation.java
+			
+			
+			
+			
+	-webapp
+		index.jsp
+		resources
+			-css, js, img ...
+		META-INF
+			-context.xml ::: connection pool 설정.		
+		WEB-INF
+			- views : jsp
+	
