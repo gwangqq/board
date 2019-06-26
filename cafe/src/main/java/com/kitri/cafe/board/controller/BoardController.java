@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kitri.cafe.common.service.CommonService;
 import com.kitri.cafe.service.BoardService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+	
+	@Autowired
+	private CommonService commonService;
+	
 	@Autowired
 	private BoardService boardService;
 	

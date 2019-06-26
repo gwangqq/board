@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
+<%@ include file="/WEB-INF/views/commons/board_common.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ko">
 <head>
@@ -8,10 +9,29 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#viewBtn").click(function() {
+		//encodingURI, encodingComponent쓰면 쿼리스트링 encoding가능 form에 input hidden으로 보내는거 많이 사용
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${seq}");
+		$("#commonForm").attr("mothod", "GET").attr("action", "${root}/reboard/view").submit();
+	});
+	
+	$("#listBtn").click(function() {
+		
+	});
+});
+
+</script>
+
 </head>
 
 <body>
-
 <table width="100%" cellpadding="6" cellspacing="2" border="0"
 	bgcolor="#ffffff" style="border: #e1e1e1 solid 1px">
 	<tr>
@@ -29,12 +49,12 @@
 			align="center"><b>게시물이 등록되었습니다.</b><br>
 		<br>
 
-		<div align="center"><a href=""><img
-			src="${root}/img/board/b_wirtecf.gif" width="91" height="21"
-			border="0" align="absmiddle" alt="작성한 글 확인" hspace="10"></a><a
-			href=""><img src="${root}/img/board/poll_listbu1.gif"
-			width="62" height="21" border="0" align="absmiddle" alt="목록보기"
-			hspace="10"></a>
+		<div align="center">
+			<img id = "viewBtn" src="${root}/img/board/b_wirtecf.gif" width="91" height="21"
+				border="0" align="absmiddle" alt="작성한 글 확인" hspace="10">
+			
+			<img id = "listBtn" src="${root}/img/board/poll_listbu1.gif" width="62" height="21" 
+				border="0" align="absmiddle" alt="목록보기" hspace="10">
 		</td>
 	</tr>
 </table>

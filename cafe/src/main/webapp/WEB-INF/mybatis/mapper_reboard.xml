@@ -4,5 +4,43 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kitri.cafe.board.dao.ReboardDao">
+	
+	<insert id="writeArticle" parameterType="reboardDto">
+	insert all
+		into board (seq, id, name, email, subject, content, hit, logtime, bcode)
+		values(#{seq}, #{id}, #{name}, #{email}, #{subject}, #{content}, 0, sysdate, #{bcode})
+		into reboard (rseq, seq, ref, lev, step, pseq, reply)
+		values (reboard_rseq.nextval, #{seq}, #{ref}, 0, 0, 0, 0)
+	select * from dual
+	</insert>
+	
+	<select id = "viewArticle" parameterType="int" resultType="reboardDto">
+	select b.seq, b.id, b.name, b.email, b.subject, b.content, b.hit, b.logtime, b.bcode,
+			r.rseq, r.ref, r.lev, r.step, r.pseq, r.reply
+			from board b, reboard r
+			where b.seq = r.seq
+			and b.seq = #{seq}
+	</select>
+
+	<select id="listArticle" parameterType="map" resultType="reboardDto">
+	select c.bcode, c.content, c.email, c.id, 
+   		 decode(to_char(c.logtime,'yymmdd'),
+	            to_char(sysdate,'yymmdd'), to_char(sysdate,'hh:mi:ss'),
+	            to_char(c.logtime,'yy.mm.dd')) logtime,
+        c.name, c.seq, c.subject, c.lev, c.pseq, c.ref, c.reply, c.rseq, c.step, c.hit
+	from(
+	    select rownum r, total.*
+	    from(
+	        select b.bcode, b.content, b.email, b.id, b.logtime, b.name, b.seq, b.subject, 
+	            r.lev, r.pseq, r.ref, r.reply, r.rseq, r.step, b.hit
+	            from board b, reboard r
+	            where b.seq = r.seq
+	            and b.bcode = #{bcode}
+	            order by seq DESC
+	            ) total
+	    where rownum &lt;= #{end}
+	    ) c
+	where c.r &gt; #{start}
+	</select>
 
 </mapper>

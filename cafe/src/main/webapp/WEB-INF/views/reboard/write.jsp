@@ -5,10 +5,10 @@
 $(document).ready(function() {
 	
 	$("#writeBtn").click(function() {
-		if($("#subject").val() != ""){
+		if($("#subject").val() == ""){
 			alert("제목입력!!!!");
 			return;
-		} else if($("#content").val() != ""){
+		} else if($("#content").val() == ""){
 			alert("내용 입력!!!1");
 			return;
 		} else {
@@ -89,12 +89,13 @@ $(document).ready(function() {
 		<td height="10" style="padding: 0px"></td>
 	</tr>
 	<tr>
-		<td align="center"><img id = "writeBtn"
-			src="${root}/img/board/btn_register.gif" width="42" height="21"
-			border="0" name="register" value="" alt="등록"> <a
-			href="javascript:history.back();"><img
-			src="${root}/img/board/b_cancel.gif" width="42" height="21"
-			border="0" name="cencel" value="" alt="취소"></a></td>
+		<td align="center">
+		<img id = "writeBtn" src="${root}/img/board/btn_register.gif" width="42" height="21"
+			border="0" name="register" value="" alt="등록"> 
+		
+		<a href="javascript:history.back();">
+		<img src="${root}/img/board/b_cancel.gif" width="42" height="21"
+		border="0" name="cencel" value="" alt="취소"></a></td>
 	</tr>
 </table>
 </form>

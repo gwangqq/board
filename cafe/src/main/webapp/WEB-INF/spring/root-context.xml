@@ -16,6 +16,7 @@
 		<property name="configLocation" value = "/WEB-INF/mybatis/configuration.xml"></property>
 		<property name="mapperLocations">
 			<list>
+				<value>/WEB-INF/mybatis/mapper_common.xml</value>
 				<value>/WEB-INF/mybatis/mapper_admin_board.xml</value>
 				<value>/WEB-INF/mybatis/mapper_reboard.xml</value>
 			</list>

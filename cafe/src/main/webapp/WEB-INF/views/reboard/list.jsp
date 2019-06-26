@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ko">
 <head>
-<title>ÀÚÀ¯ °Ô½ÃÆÇ</title>
+<title>ìžìœ  ê²Œì‹œíŒ</title>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
 <link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
 </head>
@@ -15,8 +15,8 @@
 	<tr>
 		<td><img src="${root}/img/board/m_icon_board.gif" width="9"
 			height="9" border="0" align="absmiddle" style="margin-top: -2px">
-		<b>ÀÚÀ¯°Ô½ÃÆÇ</b> &nbsp;<font style="font-size: 8pt">|</font>&nbsp; ÀÚÀ¯·Î¿î ±ÛÀ»
-		¿Ã¸®´Â °ø°£ÀÔ´Ï´Ù<br>
+		<b>ìžìœ ê²Œì‹œíŒ</b> &nbsp;<font style="font-size: 8pt">|</font>&nbsp; ìžìœ ë¡œìš´ ê¸€ì„
+		ì˜¬ë¦¬ëŠ” ê³µê°„ìž…ë‹ˆë‹¤<br>
 		</td>
 		<td align="right"></td>
 	</tr>
@@ -31,11 +31,11 @@
 	<tr valign="bottom">
 		<td nowrap><a href=""><img
 			src="${root}/img/board/btn_write_01.gif" width="64" height="22"
-			border="0" align="absmiddle" alt="±Û¾²±â"></a></td>
+			border="0" align="absmiddle" alt="ê¸€ì“°ê¸°"></a></td>
 
-		<td width="100%" style="padding-left: 6px" valign="bottom">»õ±Û <b><font
-			class="text_acc_02">»õ±Û ¼ö¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ</font></b> / ÀüÃ¼ <font
-			class="text_acc_02">ÀüÃ¼ ±Û¼ö¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ</font></td>
+		<td width="100%" style="padding-left: 6px" valign="bottom">ìƒˆê¸€ <b><font
+			class="text_acc_02">ìƒˆê¸€ ìˆ˜ë¥¼ ì¶œë ¥ í•˜ëŠ” ë¶€ë¶„</font></b> / ì „ì²´ <font
+			class="text_acc_02">ì „ì²´ ê¸€ìˆ˜ë¥¼ ì¶œë ¥ í•˜ëŠ” ë¶€ë¶„</font></td>
 		<td width="300" nowrap>
 		<div align="right"></div>
 		</td>
@@ -52,49 +52,50 @@
 			style="overflow: hidden; padding: 0px"></td>
 	</tr>
 	<tr class="bg_board_title" align="center" height="28">
-		<td nowrap><b>¹øÈ£</b></td>
+		<td nowrap><b>ë²ˆí˜¸</b></td>
 		<td nowrap class="board_bar" style="padding: 0px">|</td>
 		<td></td>
-		<td width="100%"><b>Á¦¸ñ</b></td>
+		<td width="100%"><b>ì œëª©</b></td>
 		<td nowrap class="board_bar" style="padding: 0px">|</td>
-		<td width="120" nowrap><b>±Û¾´ÀÌ</b></td>
+		<td width="120" nowrap><b>ê¸€ì“´ì´</b></td>
 		<td nowrap class="board_bar" style="padding: 0px">|</td>
-		<td nowrap><b>Á¶È¸</b></td>
+		<td nowrap><b>ì¡°íšŒ</b></td>
 		<td nowrap class="board_bar" style="padding: 0px">|</td>
-		<td width="45" nowrap><b>³¯Â¥</b></td>
+		<td width="45" nowrap><b>ë‚ ì§œ</b></td>
 	</tr>
 	<tr>
 		<td class="bg_board_title_02" height="1" colspan="11"
 			style="overflow: hidden; padding: 0px"></td>
 	</tr>
 
-	<!-- °øÁö±â´É Àû¿ë½Ã -->
+	<!-- ê³µì§€ê¸°ëŠ¥ ì ìš©ì‹œ -->
 
 
-	<!-- °øÁö±â´É Àû¿ë³¡  -->
+	<!-- ê³µì§€ê¸°ëŠ¥ ì ìš©ë  -->
+	<c:forEach var = "article" items = "${articleList}">
 	<tr>
-		<td align="center" class="text_gray">±Û¹øÈ£ Ãâ·ÂÇÏ´Â ºÎºÐ</td>
+		<td align="center" class="text_gray">${article.seq}</td>
 		<td></td>
 		<td nowrap class="onetext" style="padding-right: 5px"></td>
 		<!--td>
      
      </td-->
 		<td style="word-break: break-all;"><a href=""
-			class="link_board_03">±Û Á¦¸ñÀ» Ãâ·Â ÇÏ´Â ºÎºÐ&nbsp;&nbsp;&nbsp;</a></td>
+			class="link_board_03">${article.subject}&nbsp;&nbsp;&nbsp;</a></td>
 		<td></td>
 		<td style="word-break: break-all;"><a href="javascript:;"
-			onClick="showSideView();" class="link_board_04">ÀÛ¼ºÀÚ¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ</a></td>
+			onClick="showSideView();" class="link_board_04">${article.name}</a></td>
 		<td></td>
-		<td align="center" class="text_gray">Á¶È¸¼ö¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ</td>
+		<td align="center" class="text_gray">${article.hit}</td>
 		<td></td>
-		<td align="center" class="text_gray">ÀÛ¼º ÀÏÀÚ¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ</td>
+		<td align="center" class="text_gray">${article.logdate}</td>
 	</tr>
 
 	<tr>
 		<td bgcolor="#ededed" height="1" colspan="11"
 			style="overflow: hidden; padding: 0px"></td>
 	</tr>
-
+	</c:forEach>
 
 	<tr>
 		<td class="bg_board_title_02" height="1" colspan="11"
@@ -104,7 +105,7 @@
 </form>
 <!-- bbs end -->
 
-<!-- ÇÏ´Ü ÆäÀÌÂ¡ -->
+<!-- í•˜ë‹¨ íŽ˜ì´ì§• -->
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td colspan="3" height="5"></td>
@@ -112,16 +113,16 @@
 	<tr valign="top">
 		<td nowrap><a href=""><img
 			src="${root}/img/board/btn_write_01.gif" width="64" height="22"
-			border="0" align="absmiddle" alt="±Û¾²±â"></a></td>
-		<td width="100%" align="center"><!--PAGE--> ÆäÀÌÁö ºÐ·ù¸¦ ÇÏ´Â ºÎºÐ</td>
-		<td nowrap class="stext"><b>ÇöÀç ÆäÀÌÁö Ãâ·Â ºÎºÐ</b> / ÃÑ ÆäÀÌÁö¼ö¸¦ Ãâ·Â ÇÏ´Â ºÎºÐ
+			border="0" align="absmiddle" alt="ê¸€ì“°ê¸°"></a></td>
+		<td width="100%" align="center"><!--PAGE--> íŽ˜ì´ì§€ ë¶„ë¥˜ë¥¼ í•˜ëŠ” ë¶€ë¶„</td>
+		<td nowrap class="stext"><b>í˜„ìž¬ íŽ˜ì´ì§€ ì¶œë ¥ ë¶€ë¶„</b> / ì´ íŽ˜ì´ì§€ìˆ˜ë¥¼ ì¶œë ¥ í•˜ëŠ” ë¶€ë¶„
 		pages</td>
 	</tr>
 </table>
 <br>
-<!-- ÇÏ´Ü ÆäÀÌÂ¡ -->
+<!-- í•˜ë‹¨ íŽ˜ì´ì§• -->
 
-<!-- °Ë»ö ¿µ¿ª-->
+<!-- ê²€ìƒ‰ ì˜ì—­-->
 <form name="searchForm" method="post" action="javascript:goBbsSearch();"
 	style="margin: 0px"><input type="hidden" name="" value="">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -132,19 +133,19 @@
 		<td width="50%"></td>
 		<td nowrap><select name="item" onchange="javascript:ch()"
 			class="inp">
-			<option value="subject">±ÛÁ¦¸ñ
-			<option value="writer">±Û¾´ÀÌ
-			<option value="no">±Û¹øÈ£
+			<option value="subject">ê¸€ì œëª©
+			<option value="writer">ê¸€ì“´ì´
+			<option value="no">ê¸€ë²ˆí˜¸
 		</select> <span id="sear1"> <input type="text" name="query" size="22"
 			class="inp" style="margin-top: -19px;"> </span> <span id="sear2"
 			style="display: none;"> <select name="head" class="inp">
-			<option value="¸»¸Ó¸®¼±ÅÃ">¸»¸Ó¸®¼±ÅÃ
+			<option value="ë§ë¨¸ë¦¬ì„ íƒ">ë§ë¨¸ë¦¬ì„ íƒ
 		</select> </span> <a href="javascript:goBbsSearch();"><img
 			src="${root}/img/board/sbtn_s.gif" width="32" height="18"
-			border="0" align="absmiddle" alt="°Ë»ö"></a> <a
-			href="javascript:goMyList('¾ÈÈ¿ÀÎ')"><img
+			border="0" align="absmiddle" alt="ê²€ìƒ‰"></a> <a
+			href="javascript:goMyList('ì•ˆíš¨ì¸')"><img
 			src="${root}/img/board/sbtn_mytext.gif" width="82" height="20"
-			align="absmiddle" alt="³»°¡ ¾´ ±Û º¸±â"></a><br>
+			align="absmiddle" alt="ë‚´ê°€ ì“´ ê¸€ ë³´ê¸°"></a><br>
 		</td>
 		<td width="50%" align="right"><a href="#"><img
 			src="${root}/img/board/sbtn_top.gif" width="24" height="11"
