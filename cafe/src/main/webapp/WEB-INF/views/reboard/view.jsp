@@ -19,12 +19,64 @@ $(document).ready(function() {
 		$("#key").val("");
 		$("#word").val("");
 		$("#seq").val("");
-		$("#commonForm").attr("mothod", "GET").attr("action", "${root}/reboard/write").submit();
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/write").submit();
 	});
 	
-	$(".moveReplylistBtn").click(function() {
-		
+	$(".moveReplyBtn").click(function() {
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${article.seq}");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/reply").submit();
 	});
+	
+	$(".firstListBtn").click(function() {
+		$("#bcode").val("${bcode}");
+		$("#pg").val("1");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/list").submit();
+	});
+	
+	$(".listBtn").click(function() {
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/list").submit();
+	});
+	
+	
+	<%-- 수정 버튼--%>
+	$(".moveModifyBtn").click(function() {
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${article.seq}");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/modify").submit();
+	});
+	
+	
+	
+	$(".moveDeleteBtn").click(function() {
+		
+		var flag = confirm("게시물을 삭제하시겠습니까???");
+		
+		if(flag == true){
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${article.seq}");
+		$("#commonForm").attr("method", "POST").attr("action", "${root}/reboard/delete").submit();
+			alert("게시물이 삭제되었습니다");
+		} 
+	});
+	
+	
+	
 });
 </script>
 </head>
@@ -57,12 +109,14 @@ $(document).ready(function() {
 		</td>
 		
 		<td valign="bottom" width="100%" style="padding-left: 4px"></td>
-		<td align="right" nowrap valign="bottom"><a
-			href="javascript:goPage(1);">최신목록</a> <font color="#c5c5c5">|</font>
-		<a href="javascript:goPage();">목록</a> <font color="#c5c5c5">|</font>
+		<td align="right" nowrap valign="bottom">
+			<label class = "firstListBtn">최신목록</label>
+			<font color="#c5c5c5">|</font>
+			<label class = "listBtn">목록</label>
+			<font color="#c5c5c5">|</font>
 
-		<a href="javascript:goBbsRead();"><img
-			src="${root}/img/board/icon_up.gif" border="0" align="absmiddle"
+		<a href="javascript:goBbsRead();">
+		<img src="${root}/img/board/icon_up.gif" border="0" align="absmiddle"
 			hspace="3">윗글</a> <font color="#c5c5c5">|</font> <a
 			href="javascript:goBbsRead();">아랫글<img
 			src="${root}/img/board/icon_down.gif" border="0" align="absmiddle"
@@ -80,7 +134,7 @@ $(document).ready(function() {
 	</tr>
 	<tr height="28">
 		<td class="bg_board_title" colspan="2" style="padding-left: 14px">
-		<b><font class="text"> ${article.subject}</font></b></td>
+		<b><font class="text"> ${article.subject.replace('<','&lt;')}</font></b></td>
 	</tr>
 	<tr>
 		<td class="bg_board_title_02" colspan="2" height="1"
@@ -95,7 +149,7 @@ $(document).ready(function() {
 		<td style="padding-right: 14px" nowrap class="stext">조회 : <font
 			class="text_commentnum">${article.hit}</font> &nbsp; 스크랩 : <font
 			class="text_commentnum">0</font> &nbsp; 날짜 : <font
-			class="text_commentnum">${article.logdate}</font></td>
+			class="text_commentnum">${article.logtime}</font></td>
 	</tr>
 	<tr>
 		<td class="bg_board_title_02" colspan="2" height="1"
@@ -139,21 +193,39 @@ $(document).ready(function() {
 			width="64" height="22" border="0" align="absmiddle" alt="글쓰기"> 
 		<img src="${root}/img/board/btn_reply.gif" class = "moveReplyBtn"
 			width="40" height="22" border="0" align="absmiddle" alt="답글">
+		
+	<c:if test="${userInfo.id == article.id}">		
+		<img src="${root}/img/board/btn_modify.gif" class = "moveModifyBtn" 
+			border="0" align="absmiddle" alt="글수정"> 
+		<img src="${root}/img/board/btn_delete.gif" class = "moveDeleteBtn"
+			border="0" align="absmiddle" alt="글삭제">
+	</c:if>	
 		</td>
 		
 		<td style="padding-left: 4px" width="100%"><a href=""
 			target="new"><img src="${root}/img/board/btn_print.gif"
 			width="30" height="18" border="0" align="absmiddle" alt="인쇄"></a></td>
 
-		<td align="right" nowrap><a href="javascript:goPage(1);">최신목록</a>
-		<font color="#c5c5c5">|</font> <a href="javascript:goPage();">목록</a>
-		<font color="#c5c5c5">|</font> <a href="javascript:goBbsRead();"><img
-			src="${root}/img/board/icon_up.gif" border="0" align="absmiddle"
-			hspace="3">윗글</a> <font color="#c5c5c5">|</font> <a
-			href="javascript:goBbsRead();">아랫글<img
-			src="${root}/img/board/icon_down.gif" border="0" align="absmiddle"
-			hspace="3"></a></td>
+		<td align="right" nowrap>
+			<label class = "firstListBtn">최신목록</label>
+			<font color="#c5c5c5">|</font>
+			<label class = "listBtn">목록</label>
+			<font color="#c5c5c5">|</font>
+		
+			<img src="${root}/img/board/icon_up.gif" border="0" align="absmiddle"
+				hspace="3">윗글</a> <font color="#c5c5c5">|</font> <a
+				href="javascript:goBbsRead();">아랫글<img
+				src="${root}/img/board/icon_down.gif" border="0" align="absmiddle"
+				hspace="3"></a>
+		</td>
 	</tr>
 </table>
+
+<!-- 댓글 -->
+	
+
+
+
+
 <br>
 <%@ include file="/WEB-INF/views/commons/template/bottom.jsp"%>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
+<%@ include file="/WEB-INF/views/commons/logincheck.jsp"%>
+
 <script>
 $(document).ready(function() {
 	
@@ -9,7 +11,7 @@ $(document).ready(function() {
 			alert("제목입력!!!!");
 			return;
 		} else if($("#content").val() == ""){
-			alert("내용 입력!!!1");
+			alert("내용 입력!!!");
 			return;
 		} else {
 			$("#writeForm").attr("action", "${root}/reboard/write").submit();
@@ -53,6 +55,7 @@ $(document).ready(function() {
 <input type="hidden" name="key" value="">
 <input type="hidden" name="word" value="">
 
+
 <table border="0" cellpadding="5" cellspacing="0" width="630"
 	style="table-layout: fixed">
 
@@ -90,12 +93,13 @@ $(document).ready(function() {
 	</tr>
 	<tr>
 		<td align="center">
-		<img id = "writeBtn" src="${root}/img/board/btn_register.gif" width="42" height="21"
-			border="0" name="register" value="" alt="등록"> 
-		
-		<a href="javascript:history.back();">
-		<img src="${root}/img/board/b_cancel.gif" width="42" height="21"
-		border="0" name="cencel" value="" alt="취소"></a></td>
+			<img id = "writeBtn" src="${root}/img/board/btn_register.gif" width="42" height="21"
+				border="0" name="register" value="" alt="등록"> 
+			
+			<a href="javascript:history.back();">
+			<img src="${root}/img/board/b_cancel.gif" width="42" height="21"
+			border="0" name="cencel" value="" alt="취소"></a>
+		</td>
 	</tr>
 </table>
 </form>

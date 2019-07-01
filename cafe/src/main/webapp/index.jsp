@@ -3,6 +3,7 @@
 <%
 response.sendRedirect(request.getContextPath()+"/boardadmin/boardmenu");
 
+
 MemberDto memberDto = new MemberDto();
 
 memberDto.setId("gwangq");

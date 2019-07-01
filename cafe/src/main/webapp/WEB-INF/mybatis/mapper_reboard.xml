@@ -36,11 +36,67 @@
 	            from board b, reboard r
 	            where b.seq = r.seq
 	            and b.bcode = #{bcode}
-	            order by seq DESC
+	            <if test="word != null and word != ''" >
+	            	<if test="key == 'subject'">
+	            	and b.subject like '%'||#{word}||'%'
+	            	</if>
+	            	<if test="key != 'subject'">
+	            	and b.${key} = #{word}
+	            	</if>
+	            </if>
+	            order by ref DESC, step
 	            ) total
 	    where rownum &lt;= #{end}
 	    ) c
 	where c.r &gt; #{start}
 	</select>
+	
+	<update id="updateStep" parameterType="reboardDto">
+	update reboard SET step = step+1
+    where ref = #{ref} 
+    and step > #{step}
+	</update>
+	
+	
+	<insert id="replyArticle" parameterType="reboardDto">
+	insert all
+		into board (seq, id, name, email, subject, content, hit, logtime, bcode)
+		values(#{seq}, #{id}, #{name}, #{email}, #{subject}, #{content}, 0, sysdate, #{bcode})
+		into reboard (rseq, seq, ref, lev, step, pseq, reply)
+		values (reboard_rseq.nextval, #{seq}, #{ref}, #{lev}+1, #{step}+1, #{pseq}, 0)
+	select * from dual	
+	</insert>
+	
+	
+	<update id="updateReply" parameterType="int">
+	update reboard 
+	set reply = reply+1
+	where seq = #{pseq}
+	</update>
+	
+	<select id="viewModify" parameterType="int" resultType="reboardDto">
+		select b.seq, b.id, b.name, b.email, b.subject, b.content, b.hit, b.logtime, b.bcode,
+			r.rseq, r.ref, r.lev, r.step, r.pseq, r.reply
+			from board b, reboard r
+			where b.seq = r.seq
+			and b.seq = #{seq}
+	</select>
+	
+	<update id="modifyArticle" parameterType="reboardDto">
+		update board
+		  set 
+		     subject = #{subject},
+		     content = #{content},
+		     logtime = sysdate
+		  where seq = #{seq}
+	</update>
+	
+	<delete id="deleteReboard" parameterType="int">
+	delete from reboard where seq = #{seq}
+	</delete>
 
+	<delete id="deleteBoard" parameterType="int">
+	delete from board where seq = #{seq}
+	</delete>
+	
 </mapper>

@@ -1,12 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
+<%@ include file="/WEB-INF/views/commons/logincheck.jsp"%>
+<%@ include file="/WEB-INF/views/commons/board_common.jsp"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ko">
 <head>
 <title>게시판 글쓰기</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
+<script type="text/javascript">
+$(document).ready(function() {
+		alert("로오딩~");
+	
+	$(".modifyBtn").click(function() {
+		alert("수정눌렸따");
+		$("#bcode").val("${param.bcode}");
+		$("#pg").val("${param.pg}");
+		$("#key").val("${param.key}");
+		$("#word").val("${param.word}");
+		$("#seq").val("${article.seq}");
+		$("#modifyForm").attr("method", "POST").attr("action", "${root}/reboard/modify").submit();
+	});
+	
+});
+</script>
+
 </head>
 
 <body>
@@ -41,7 +61,11 @@
 	style="margin: 0px">
 <div id="attach_file_hdn"></div>
 
-<input type="hidden" name="" value="">
+<input type="hidden" name="bcode" value="" id="bcode">
+<input type="hidden" name="pg" value="" id="pg">
+<input type="hidden" name="key" value="" id="key">
+<input type="hidden" name="word" value="" id="word">
+<input type="hidden" name="seq" value="" id="seq">
 
 <table border="0" cellpadding="5" cellspacing="0" width="630"
 	style="table-layout: fixed">
@@ -50,9 +74,11 @@
 		<td width="95" nowrap style="padding-left: 8px; padding-top: 10px"><img
 			src="${root}/img/board/e_dot.gif" width="4" height="4" border="0"
 			align="absmiddle"> <b>제목</b></td>
-		<td colspan="5"><input name="subject" id="subject" type="text"
-			size="76" maxlength="150" class="inp_02" style="width: 300px"
-			value=""><img src="${root}/img/board/i_info.gif" width="12"
+		<td colspan="5">
+		<input name="subject" id="subject" type="text" size="76" maxlength="150" class="inp_02" style="width: 300px"
+			value="${article.subject}">
+			
+			<img src="${root}/img/board/i_info.gif" width="12"
 			height="11" border="0" align="absmiddle" vspace="8"
 			style="margin: 3 3 0 6"><font class="stext">최대 한글 75자,
 		영문 150자</font><br>
@@ -61,7 +87,9 @@
 		<td width="620" nowrap style="padding-left: 8px; padding-top: 10px"
 			colspan="5"><img src="${root}/img/board/e_dot.gif" width="4"
 			height="4" border="0" align="absmiddle"> <b>글내용</b> <textarea
-			name="content" class="inp_02" cols="67" rows="25" scrollbars="no"></textarea>
+			name="content" class="inp_02" cols="67" rows="25" scrollbars="no">
+${article.content }
+			</textarea>
 		</td>
 	</tr>
 </table>
@@ -79,11 +107,12 @@
 		<td height="10" style="padding: 0px"></td>
 	</tr>
 	<tr>
-		<td align="center"><a href="javascript:writeArticle();"><img
-			src="${root}/img/board/btn_register.gif" width="42" height="21"
-			border="0" name="register" alt="등록"></a> <a
-			href="javascript:history.back();"><img
-			src="${root}/img/board/b_cancel.gif" width="42" height="21"
+		<td align="center">
+			<img src="${root}/img/board/btn_modify.gif" width="42" height="21"
+			class = "modifyBtn" border="0" name="register" alt="등록"> 
+		
+		<a href="javascript:history.back();">
+			<img src="${root}/img/board/b_cancel.gif" width="42" height="21"
 			border="0" name="cencel" alt="취소"></a></td>
 	</tr>
 </table>

@@ -13,4 +13,9 @@ public interface ReboardDao {
 	int modifyArticle(ReboardDto reboardDto);
 	void deleteArticle(int seq);
 	
+	void updateStep(ReboardDto reboardDto);
+	int replyArticle(ReboardDto reboardDto);
+	void updateReply(int pseq);
+	
+	
 }

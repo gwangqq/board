@@ -9,7 +9,7 @@ public class BoardDto {
 	private String subject;
 	private String content;
 	private int hit;
-	private String logdate;
+	private String logtime;
 	private String bcode;
 
 	public String getBcode() {
@@ -76,12 +76,13 @@ public class BoardDto {
 		this.hit = hit;
 	}
 
-	public String getLogdate() {
-		return logdate;
+	public String getLogtime() {
+		return logtime;
 	}
 
-	public void setLogdate(String logdate) {
-		this.logdate = logdate;
+	public void setLogtime(String logtime) {
+		this.logtime = logtime;
 	}
+	
 
 }
