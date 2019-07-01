@@ -47,4 +47,10 @@ public class MemoServiceImpl implements MemoService {
 		return makeJson(seq);
 	}
 
+	@Override
+	public void updateMemo(MemoDto memoDto) {
+		sqlSession.getMapper(MemoDao.class).updateMemo(memoDto);
+		
+	}
+
 }

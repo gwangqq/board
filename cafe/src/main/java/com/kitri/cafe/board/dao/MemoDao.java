@@ -11,4 +11,5 @@ public interface MemoDao {
 	MemoDto viewMemo(int seq);
 	int modifyMemo(MemoDto memoDto);
 	void deleteMemo(int mseq);
+	void updateMemo(MemoDto memoDto);
 }

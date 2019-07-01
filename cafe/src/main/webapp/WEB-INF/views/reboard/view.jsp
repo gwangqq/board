@@ -87,6 +87,7 @@ $(document).ready(function() {
 		} else {
 			var seq ='${article.seq}';
 			var mcontent = $("#mcontent").val();
+			alert(seq + "|" + mcontent);
 			var param = JSON.stringify({'seq' : seq, 'mcontent' : mcontent});
 			if(mcontent.trim().length != 0){
 				$.ajax({
@@ -145,7 +146,7 @@ $(document).ready(function() {
 			memostr +='	<td colspan = "3" style="padding: 10px">';
 			memostr +='		<textarea class="mcontent" cols="160" rows="5">'+memo.mcontent+'</textarea>';
 			memostr +='	</td>';
-			memostr +='	<td width="100" style="padding: 10px">';
+			memostr +='	<td width="100" style="padding: 10px" data-mseq="'+memo.mseq+'">';
 			memostr +='		<input type="button" class= "memoModifyBtn" value = "글수정">';
 			memostr +='		<input type="button" class= "memoModifyCancelBtn" value = "취소">';
 			memostr +='	</td>';
@@ -179,9 +180,10 @@ $(document).ready(function() {
 	$(document).on("click", ".memoModifyBtn", function() {
 		alert("수정시작!");
 		var seq ='${article.seq}';
-		var mcontent = $(".mcontent").val();
-		alert(seq + "||" + mcontent);
-		var param = JSON.stringify({'seq' : seq, 'mcontent' : mcontent});
+		var mcontent = $(this).parent().prev().find(".mcontent").val();
+		var mseq = $(this).parent().attr("data-mseq");
+		alert(seq + "||" + mcontent + "|" +mseq);
+		var param = JSON.stringify({'seq' : seq, 'mcontent' : mcontent, 'mseq' : mseq});
 		if(mcontent.trim().length != 0){
 			$.ajax({
 				url:'${root}/memo/',

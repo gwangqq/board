@@ -10,4 +10,5 @@ public interface MemoService {
 	String listMemo(int seq);
 	void modifyMemo(MemoDto memoDto);
 	String deleteMemo(int seq, int mseq);
+	void updateMemo(MemoDto memoDto);
 }

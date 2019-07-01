@@ -10,14 +10,22 @@
 		values (memo_mseq.nextval, ${seq}, #{id}, #{name}, #{mcontent}, sysdate)
 	</insert>
 	<select id="listMemo" parameterType="int" resultType="memoDto">
-	select mseq, seq, id, name, mcontent, mtime
-	from memo
-	where seq = #{seq}
-	order by mseq desc
+		select mseq, seq, id, name, mcontent, mtime
+		from memo
+		where seq = #{seq}
+		order by mseq desc
 	</select>
 	
 	<delete id="deleteMemo" parameterType="int">
 		delete memo
 		where mseq = #{mseq}
 	</delete>
+	
+	<update id="updateMemo">
+		update memo
+		set mcontent = #{mcontent},
+			mtime = sysdate
+		where mseq = #{mseq}
+		and id = #{id}
+	</update>
 </mapper>

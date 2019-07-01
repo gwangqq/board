@@ -58,13 +58,14 @@ public class MemoController {
 //----------------------------[메모수정]-------------------------------
 	
 	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json", headers = {"Content-type=application/json"})
-	public String modify(MemoDto memoDto, HttpSession session) {
+	public String modify(@RequestBody MemoDto memoDto, HttpSession session) {
+		System.out.println(memoDto);
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
 		if(memberDto != null) {
 			memoDto.setId(memberDto.getId());
 			memoDto.setName(memberDto.getName());
 			System.out.println("Controller : " + memoDto);
-			memoService.writeMemo(memoDto);
+			memoService.updateMemo(memoDto);
 			String json = memoService.listMemo(memoDto.getSeq());
 			return json;
 		}
