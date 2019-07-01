@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/template/top.jsp"%>
 <%@ include file="/WEB-INF/views/commons/logincheck.jsp"%>
-<%@ include file="/WEB-INF/views/commons/board_common.jsp"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ko">
@@ -12,10 +11,8 @@
 <link rel="stylesheet" href="${root}/css/skin_purple.css" type="text/css">
 <script type="text/javascript">
 $(document).ready(function() {
-		alert("로오딩~");
 	
 	$(".modifyBtn").click(function() {
-		alert("수정눌렸따");
 		$("#bcode").val("${param.bcode}");
 		$("#pg").val("${param.pg}");
 		$("#key").val("${param.key}");
@@ -57,7 +54,7 @@ $(document).ready(function() {
 </table>
 <br>
 
-<form id="writeForm" name="writeForm" method="post" action=""
+<form id="modifyForm" name="modifyForm" method="post" action=""
 	style="margin: 0px">
 <div id="attach_file_hdn"></div>
 

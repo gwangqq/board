@@ -6,9 +6,9 @@ import java.util.Map;
 import com.kitri.cafe.board.model.MemoDto;
 
 public interface MemoDao {
-	int writeArticle(MemoDto memoDto);
-	List<MemoDto> listArticle(Map<String, String> parameter);
-	MemoDto viewArticle(int seq);
-	int modifyArticle(MemoDto memoDto);
-	void deleteArticle(int seq);
+	int writeMemo(MemoDto memoDto);
+	List<MemoDto> listMemo(int seq);
+	MemoDto viewMemo(int seq);
+	int modifyMemo(MemoDto memoDto);
+	void deleteMemo(int mseq);
 }

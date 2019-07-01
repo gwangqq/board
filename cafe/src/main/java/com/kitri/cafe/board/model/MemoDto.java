@@ -57,4 +57,12 @@ public class MemoDto {
 		this.mtime = mtime;
 	}
 
+	@Override
+	public String toString() {
+		return "MemoDto [mseq=" + mseq + ", seq=" + seq + ", id=" + id + ", name=" + name + ", mcontent=" + mcontent
+				+ ", mtime=" + mtime + "]";
+	}
+	
+	
+	
 }

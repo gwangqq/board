@@ -144,24 +144,8 @@ public class ReboardController {
 		return path;
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String delete(ReboardDto reboardDto, @RequestParam Map<String, String> parameter, 
-			Model model, HttpSession session) {
-		String path = "";
-		
-		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-
-		if (memberDto != null) {
-			int seq = reboardDto.getSeq();
-			reboardService.deleteArticle(seq);
-			path = "reboard/list";
-			
-		}
-		model.addAttribute("parameter", parameter);
-		
-		return path;
-	}
 	
+//-----------------------------------[수정기능]--------------------------------------------------
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(@RequestParam("seq") int seq, 
 							@RequestParam Map<String, String> parameter, Model model) {
@@ -186,14 +170,8 @@ public class ReboardController {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
 
 		if (memberDto != null) {
-			int seq = commonService.getNextSeq();
-			reboardDto.setSeq(seq);
-			reboardDto.setId(memberDto.getId());
-			reboardDto.setName(memberDto.getName());
-			reboardDto.setEmail(memberDto.getEmail());
-			reboardDto.setRef(seq);
 
-			seq = reboardService.modifyArticle(reboardDto);
+			int seq = reboardService.modifyArticle(reboardDto);
 
 			if (seq != 0) {
 				model.addAttribute("seq", seq);
@@ -208,6 +186,24 @@ public class ReboardController {
 		model.addAttribute("parameter", parameter);
 		return path;
 	}
+//-------------------------------[삭제기능]-----------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(ReboardDto reboardDto, @RequestParam Map<String, String> parameter, 
+			Model model, HttpSession session) {
+		String path = "";
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
 
+		if (memberDto != null) {
+			int seq = reboardDto.getSeq();
+			reboardService.deleteArticle(seq);
+			path = "reboard/list";
+			
+		}
+		model.addAttribute("parameter", parameter);
+		
+		return path;
+	}
+	
 
 }

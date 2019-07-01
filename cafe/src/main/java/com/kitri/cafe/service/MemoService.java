@@ -7,7 +7,7 @@ import com.kitri.cafe.board.model.MemoDto;
 
 public interface MemoService {
 	void writeMemo(MemoDto memoDto);
-	List<MemoDto> listMemo(Map<String, String> parameter);
+	String listMemo(int seq);
 	void modifyMemo(MemoDto memoDto);
-	void deleteMemo(int mseq);
+	String deleteMemo(int seq, int mseq);
 }
