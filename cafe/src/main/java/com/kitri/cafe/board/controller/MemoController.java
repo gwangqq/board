@@ -59,12 +59,12 @@ public class MemoController {
 	
 	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json", headers = {"Content-type=application/json"})
 	public String modify(@RequestBody MemoDto memoDto, HttpSession session) {
-		System.out.println(memoDto);
+//		System.out.println(memoDto);
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
 		if(memberDto != null) {
 			memoDto.setId(memberDto.getId());
 			memoDto.setName(memberDto.getName());
-			System.out.println("Controller : " + memoDto);
+//			System.out.println("Controller : " + memoDto);
 			memoService.updateMemo(memoDto);
 			String json = memoService.listMemo(memoDto.getSeq());
 			return json;
