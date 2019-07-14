@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kitri.cafe.board.dao.AlbumDao">
+	
+	<insert id="writeArticle" parameterType="albumDto">
+	insert all
+		into board (seq, id, name, email, subject, content, hit, logtime, bcode)
+		values(#{seq}, #{id}, #{name}, #{email}, #{subject}, #{content}, 0, sysdate, #{bcode})
+		into album (aseq, seq, orign_picture, save_picture, savefolder, type)
+		values (album_aseq.nextval, #{seq}, #{originPicture}, #{savePicture}, #{saveFolder}, 0)
+	select * from dual
+	</insert>
+	
+	<select id = "viewArticle" parameterType="int" resultType="albumDto">
+	select b.seq, b.id, b.name, b.email, b.subject, b.content, b.hit, b.logtime, b.bcode,
+			a.aseq, a.orign_picture originPicture, a.save_picture savePicture, a.savefolder saveFolder, a.type
+			from board b, album a
+			where b.seq = a.seq
+			and b.seq = #{seq}
+	</select>
+
+	<select id="listArticle" parameterType="map" resultType="albumDto">
+	select c.bcode, c.content, c.email, c.id, 
+   		 decode(to_char(c.logtime,'yymmdd'),
+	            to_char(sysdate,'yymmdd'), to_char(sysdate,'hh:mi:ss'),
+	            to_char(c.logtime,'yy.mm.dd')) logtime,
+        c.aseq, c.originPicture, c.savePicture , c.saveFolder, c.type
+	from(
+	    select rownum r, total.*
+	    from(
+	        select b.bcode, b.content, b.email, b.id, b.logtime, b.name, b.seq, b.subject, 
+	            a.aseq, a.origin_picture originPicture, a.save_picture savePicture, a.savefolder saveFolder, a.type
+	            from board b, album a
+	            where b.seq = a.seq
+	            and b.bcode = #{bcode}
+	            <if test="word != null and word != ''" >
+	            	<if test="key == 'subject'">
+	            	and b.subject like '%'||#{word}||'%'
+	            	</if>
+	            	<if test="key != 'subject'">
+	            	and b.${key} = #{word}
+	            	</if>
+	            </if>
+	            order by b.seq DESC, step
+	            ) total
+	    where rownum &lt;= #{end}
+	    ) c
+	where c.r &gt; #{start}
+	</select>
+	
+	
+	
+	<select id="viewModify" parameterType="int" resultType="albumDto">
+		select b.seq, b.id, b.name, b.email, b.subject, b.content, b.hit, b.logtime, b.bcode,
+			r.rseq, r.ref, r.lev, r.step, r.pseq, r.reply
+			from board b, reboard r
+			where b.seq = r.seq
+			and b.seq = #{seq}
+	</select>
+	
+	<update id="modifyArticle" parameterType="albumDto">
+		update board
+		  set 
+		     subject = #{subject},
+		     content = #{content},
+		     logtime = sysdate
+		  where seq = #{seq}
+	</update>
+	
+	<delete id="deleteReboard" parameterType="int">
+	delete from reboard where seq = #{seq}
+	</delete>
+
+	<delete id="deleteBoard" parameterType="int">
+	delete from board where seq = #{seq}
+	</delete>
+</mapper>
