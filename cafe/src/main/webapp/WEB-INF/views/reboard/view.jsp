@@ -142,6 +142,8 @@ $(document).ready(function() {
 			memostr += '<input type = "button" class = "mdeleteBtn" value = "삭제">';
 			memostr +='</td></tr>';
 			
+			
+			
 			memostr +='<tr class = "modifyComment" style = "display : none;">';
 			memostr +='	<td colspan = "3" style="padding: 10px">';
 			memostr +='		<textarea class="mcontent" cols="160" rows="5">'+memo.mcontent+'</textarea>';

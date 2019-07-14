@@ -50,7 +50,6 @@ public class MemoServiceImpl implements MemoService {
 	@Override
 	public void updateMemo(MemoDto memoDto) {
 		sqlSession.getMapper(MemoDao.class).updateMemo(memoDto);
-		
 	}
 
 }
